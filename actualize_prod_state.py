@@ -31,19 +31,12 @@ template_body = "{\"data\":{\"identity\":\"%s\",\"name\":\"%s\",\"equipment_clas
 if __name__ == '__main__':
     req = requests.Session()
     responce = req.post(hostname + '/action/login', data=auth_data)
+    print(responce.content)
     c = req.cookies
     h = req.headers
 
-    fout = open(input_file, 'r')
-    st_list = fout.readlines()
-    fout.close()
-    st_list = st_list[1:]
-    for line in st_list:
-        items = line.strip().split(';')
-        body = template_body % (items[0], items[1], items[2],items[3])
-        print(body)
-        body = body.encode('UTF-8')
-        response = req.post(hostname + '/action/equipment/create', data = body, cookies = c, headers = h)
-        print(response.content)
-        print()
-        pass
+    responce = req.post(hostname + '/action/actualize_production_state', data='', cookies = c, headers=h)
+    print(responce.content)
+
+    responce = req.get(hostname+'/action/logout', cookies=c, headers=h)
+    print(responce.content)

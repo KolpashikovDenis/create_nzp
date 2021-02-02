@@ -5,7 +5,7 @@ import sys, os
 import datetime as dt
 from datetime import timedelta
 
-configfilename = os.path.abspath(os.path.dirname(sys.argv[0])) + '\properties.ini'
+configfilename = os.path.abspath(os.path.dirname(sys.argv[0])) + '\create_equipment.ini'
 config = configparser.ConfigParser()
 
 config.read(configfilename)
